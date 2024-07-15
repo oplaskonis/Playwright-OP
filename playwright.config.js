@@ -1,5 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require("@playwright/test");
+const { on } = require("events");
 
 /**
  * Read environment variables from file.
@@ -28,10 +29,15 @@ module.exports = defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "https://playwright.dev",
+    headless: false,
+    baseURL: "https://qauto.forstudy.space/",
+    httpCredentials: {
+      username: "guest",
+      password: "welcome2qauto",
+    },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "retain-on-failure",
+    trace: "on",
     screenshot: "only-on-failure",
   },
 
@@ -39,7 +45,14 @@ module.exports = defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        headless: false,
+        viewport: {
+          width: 400,
+          height: 300,
+        },
+      },
     },
 
     // {
