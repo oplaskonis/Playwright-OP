@@ -1,6 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require("@playwright/test");
-const { on } = require("events");
+import { on } from "events";
 
 /**
  * Read environment variables from file.
