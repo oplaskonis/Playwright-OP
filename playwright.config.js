@@ -22,7 +22,14 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [
+    [
+      "html",
+      {
+        open: "always",
+      },
+    ],
+  ],
   testIgnore: "**.skip.js",
   testMatch: "**.run.js",
   outputDir: "results",
@@ -37,8 +44,9 @@ module.exports = defineConfig({
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on",
+    trace: "retain-on-failure",
     screenshot: "only-on-failure",
+    video: "off",
   },
 
   /* Configure projects for major browsers */
